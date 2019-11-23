@@ -79,7 +79,7 @@ def run(args):
 
 
 def get_args():
-    parser = argparse.ArgumentParser(description='Process some integers.',)
+    parser = argparse.ArgumentParser(description='Rate the currently playing song',)
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-l", "--like", action="store_true")
     group.add_argument("-ul", "--unlike", action="store_true")
