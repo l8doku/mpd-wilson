@@ -17,5 +17,5 @@ Wilson rating means "lower bound of Wilson score confidence interval for a Berno
 
 * Add ability to create a playlist with top rated songs.
 * Add ability to check rating without changing it.
-* Add option to set up notifications on rating check (for shortcuts).
+* Turn the script into a daemon?
 * Move TODO list to issues.
