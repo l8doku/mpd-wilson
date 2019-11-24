@@ -69,6 +69,31 @@ def run(args):
     cli.sticker_set('song', uri, 'dislikes', dislikes)
     cli.sticker_set('song', uri, 'wrating', wrating)
 
+
+    if args.notify:
+        import notify2
+        notify2.init("Rating notifier")
+        notify_text = ""
+        if args.like:
+            notify_text = "Liked!\n"
+        elif args.dislike:
+            notify_text = "Disliked!\n"
+        elif args.unlike:
+            notify_text = "Unliked!\n"
+        elif args.undislike:
+            notify_text = "Undisiked!\n"
+
+        notify_text += "L: " + str(likes) + "\n"
+        notify_text += "D: " + str(dislikes) + "\n"
+        notify_text += "R: " + str(wrating) + "\n"
+        n = notify2.Notification("Rating",
+                            notify_text,
+                            "notification-message-im"   # Icon name
+                            )
+        n.set_timeout(1000)
+
+        n.show()
+
     if args.verbose:
         print('Likes after update    =', likes)
         print('Dislikes after update =', dislikes)
@@ -86,6 +111,7 @@ def get_args():
     group.add_argument("-d", "--dislike", action="store_true")
     group.add_argument("-ud", "--undislike", action="store_true")
     parser.add_argument("-v", "--verbose", action="store_true")
+    parser.add_argument("-n", "--notify", action="store_true")
 
     args = parser.parse_args()
     return args
