@@ -48,7 +48,6 @@ def run(args):
         print('Dislikes before update =', dislikes)
         print('Rating before update   =', wrating)
 
-
     if args.like:
         likes += 1
     elif args.dislike:
@@ -65,13 +64,15 @@ def run(args):
     dislikes = str(dislikes)
     wrating = '{0:.10f}'.format(wrating)
 
-    cli.sticker_set('song', uri, 'likes', likes)
-    cli.sticker_set('song', uri, 'dislikes', dislikes)
-    cli.sticker_set('song', uri, 'wrating', wrating)
+    if args.like or args.dislike or args.unlike or args.undislike:
+        cli.sticker_set('song', uri, 'likes', likes)
+        cli.sticker_set('song', uri, 'dislikes', dislikes)
+        cli.sticker_set('song', uri, 'wrating', wrating)
 
 
     if args.notify:
         import notify2
+        timeout = 1000
         notify2.init("Rating notifier")
         notify_text = ""
         if args.like:
@@ -82,15 +83,18 @@ def run(args):
             notify_text = "Unliked!\n"
         elif args.undislike:
             notify_text = "Undisiked!\n"
+        else:
+            notify_text = "Checking!\n"
+            timeout = 2000
 
         notify_text += "L: " + str(likes) + "\n"
         notify_text += "D: " + str(dislikes) + "\n"
         notify_text += "R: " + str(wrating) + "\n"
-        n = notify2.Notification("Rating",
-                            notify_text,
-                            "notification-message-im"   # Icon name
+        n = notify2.Notification(notify_text,
+                            "Rating",
+                            icon="notification-message-im"   # Icon name
                             )
-        n.set_timeout(1000)
+        n.set_timeout(timeout)
 
         n.show()
 
