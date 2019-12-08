@@ -13,9 +13,6 @@ Wilson rating means "lower bound of Wilson score confidence interval for a Berno
 * `-l`, `-ul`, `-d`, `-ud` are *like*, *unlike*, *dislike* and *undislike* respectively. 
 * `-v`: verbose mode. Prints the sticker values before and after the update.
 
-# TODO
+# Dependencies
 
-* Add ability to create a playlist with top rated songs.
-* Add ability to check rating without changing it.
-* Turn the script into a daemon?
-* Move TODO list to issues.
+* `musicpd`
